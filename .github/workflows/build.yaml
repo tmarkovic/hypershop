@@ -34,7 +34,7 @@ jobs:
     needs: build
     environment:
       name: "main"
-
+      url: "http://hypershop.s3-website-eu-west-1.amazonaws.com"
     steps:
       - name: Configure AWS
         uses: aws-actions/configure-aws-credentials@v1
