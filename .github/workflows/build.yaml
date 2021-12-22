@@ -47,4 +47,4 @@ jobs:
         with:
           name: ${{env.APP_NAME}}-main-${{github.run_number}}
       - name: Deploy site to s3
-        run: aws s3 sync . s3:/${{env.APP_NAME}}
+        run: aws s3 sync . s3://${{env.APP_NAME}}
