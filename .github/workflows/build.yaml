@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  APP_NAME: hypershop
+  ARTIFACT_NAME: ${{env.APP_NAME}}-main-${{github.run_number}}
+
 jobs:
   build:
     runs-on: ubuntu-latest # Run on same os and hardware
@@ -23,7 +27,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: frontend-app
+          name: ${{env.ARTIFACT_NAME}}
           path: ./build
 
   deploy:
@@ -42,6 +46,6 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: frontend-app
+          name: ${{env.ARTIFACT_NAME}}
       - name: Deploy site to s3
-        run: aws s3 sync . s3://hypershop
+        run: aws s3 sync ./build s3:/${{env.APP_NAME}}
