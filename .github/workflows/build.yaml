@@ -44,4 +44,4 @@ jobs:
         with:
           name: frontend-app
       - name: Deploy site to s3
-        run: aws s3 sync ./build s3://hypershop
+        run: aws s3 sync . s3://hypershop
